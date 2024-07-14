@@ -1,5 +1,11 @@
 # Ola Maps Python API Wrapper Library (Unofficial)
 
+<p align="left">
+<a href="https://pypi.org/project/py-olamaps" target="_blank">
+    <img src="https://img.shields.io/pypi/v/py-olamaps?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+</p>
+
 The Ola Maps Python library provides convenient access to the Ola Maps API from any Python 3.9+ application. The library
 currently includes type definitions for [Directions API](https://maps.olakrutrim.com/apidocs/routing) present inside
 Routing APIs. Our end goal is to provide all the
