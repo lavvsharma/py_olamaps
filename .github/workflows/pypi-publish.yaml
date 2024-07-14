@@ -19,15 +19,18 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
-          python -m pip install --upgrade pip
-          pip install setuptools wheel twine
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> $GITHUB_ENV
+          source $GITHUB_ENV
+
+      - name: Install dependencies
+        run: poetry install --no-root
 
       - name: Build and publish
-        run: |
-          python setup.py sdist bdist_wheel
-          twine upload --skip-existing --repository pypi dist/*
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry build
+          poetry publish --no-interaction --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
