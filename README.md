@@ -1,8 +1,12 @@
 # Ola Maps Python API Wrapper Library (Unofficial)
 
-<p align="left">
+<p align="center">
 <a href="https://pypi.org/project/py-olamaps" target="_blank">
     <img src="https://img.shields.io/pypi/v/py-olamaps?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+
+<a href="https://pypistats.org/packages/olamaps" target="_blank">
+    <img src="https://img.shields.io/pypi/dm/olamaps" alt="Downloads">
 </a>
 </p>
 
