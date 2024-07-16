@@ -19,3 +19,4 @@ class OlaMaps:
             )
         self.api_key = api_key
         self.routing = resources.Routing(self)
+        self.places = resources.Places(self)
