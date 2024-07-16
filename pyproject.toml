@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-olamaps"
-version = "0.2.0"
+version = "0.2.1"
 description = "Python client library for Ola Maps API Services"
 authors = ["Lav Sharma <lavsharma2016@gmail.com>"]
 readme = "README.md"
