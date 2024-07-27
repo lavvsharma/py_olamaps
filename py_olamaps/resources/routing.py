@@ -10,6 +10,7 @@ class Routing:
     def __init__(self,
                  client):
         self._api_key = client.api_key
+        self._access_token = client.access_token
 
     def directions(self,
                    origin: str,
@@ -68,51 +69,51 @@ class Routing:
 
         :return: dict
         """
-        try:
-            query_params = dict()
-            headers = dict()
+        query_params = dict()
+        headers = dict()
 
-            directions_api_url = Api.Protocol.value + Api.Host.value + Api.Routing_Directions_Endpoint.value
-
+        if self._api_key is None:
+            headers["Authorization"] = f"Bearer {str(self._access_token)}"
+        else:
             query_params["api_key"] = self._api_key
-            query_params["origin"] = origin
-            query_params["destination"] = destination
-            query_params["alternatives"] = alternatives
-            query_params["steps"] = steps
-            query_params["overview"] = overview
-            query_params["languages"] = languages
-            query_params["traffic_metadata"] = traffic_metadata
 
-            if waypoints is not None:
-                query_params["waypoints"] = waypoints
+        query_params["origin"] = origin
+        query_params["destination"] = destination
+        query_params["alternatives"] = alternatives
+        query_params["steps"] = steps
+        query_params["overview"] = overview
+        query_params["languages"] = languages
+        query_params["traffic_metadata"] = traffic_metadata
 
-            if x_request_id is not None:
-                headers["x_request_id"] = x_request_id
+        if waypoints is not None:
+            query_params["waypoints"] = waypoints
 
-            if x_correlation_id is not None:
-                headers["x_correlation_id"] = x_correlation_id
+        if x_request_id is not None:
+            headers["x_request_id"] = x_request_id
 
-            response = requests.post(directions_api_url, headers=headers, params=query_params)
+        if x_correlation_id is not None:
+            headers["x_correlation_id"] = x_correlation_id
 
-            if response.status_code == HTTPStatus.OK:
-                return response.json()
-            elif response.status_code == HTTPStatus.BAD_REQUEST:
-                raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNAUTHORIZED:
-                raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
-            elif response.status_code == HTTPStatus.FORBIDDEN:
-                raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
-            elif response.status_code == HTTPStatus.NOT_FOUND:
-                raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
-            elif response.status_code == HTTPStatus.CONFLICT:
-                raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
-                raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
-            elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-                raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
-            elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-                raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
-            else:
-                raise APIException("Unknown Error", response, query_params)
-        except Exception:
-            raise
+        directions_api_url = Api.Protocol.value + Api.Host.value + Api.Routing_Directions_Endpoint.value
+        response = requests.post(directions_api_url, headers=headers, params=query_params)
+
+        if response.status_code == HTTPStatus.OK:
+            return response.json()
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNAUTHORIZED:
+            raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
+        elif response.status_code == HTTPStatus.FORBIDDEN:
+            raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
+        elif response.status_code == HTTPStatus.NOT_FOUND:
+            raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
+        elif response.status_code == HTTPStatus.CONFLICT:
+            raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
+            raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
+        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
+            raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
+        elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
+            raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
+        else:
+            raise APIException("Unknown Error", response, query_params)

@@ -10,6 +10,7 @@ class Places:
     def __init__(self,
                  client):
         self._api_key = client.api_key
+        self._access_token = client.access_token
 
     def autocomplete(self,
                      input: str,
@@ -48,58 +49,57 @@ class Places:
 
         :return: dict
         """
-        try:
-            query_params = dict()
-            headers = dict()
+        query_params = dict()
+        headers = dict()
 
-            autocomplete_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Autocomplete_Endpoint.value
-
+        if self._api_key is None:
+            headers["Authorization"] = f"Bearer {str(self._access_token)}"
+        else:
             query_params["api_key"] = self._api_key
-            query_params["input"] = input
 
-            if origin is not None:
-                query_params["origin"] = origin
+        query_params["input"] = input
 
-            if location is not None:
-                query_params["location"] = location
+        if origin is not None:
+            query_params["origin"] = origin
 
-            if radius is not None:
-                query_params["radius"] = radius
+        if location is not None:
+            query_params["location"] = location
 
-            if strictbounds is not None:
-                query_params["strictbounds"] = strictbounds
+        if radius is not None:
+            query_params["radius"] = radius
 
-            if x_request_id is not None:
-                headers["x_request_id"] = x_request_id
+        if strictbounds is not None:
+            query_params["strictbounds"] = strictbounds
 
-            if x_correlation_id is not None:
-                headers["x_correlation_id"] = x_correlation_id
+        if x_request_id is not None:
+            headers["x_request_id"] = x_request_id
 
-            response = requests.get(autocomplete_api_url, headers=headers, params=query_params)
+        if x_correlation_id is not None:
+            headers["x_correlation_id"] = x_correlation_id
 
-            if response.status_code == HTTPStatus.OK:
-                return response.json()
-            elif response.status_code == HTTPStatus.BAD_REQUEST:
-                raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNAUTHORIZED:
-                raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
-            elif response.status_code == HTTPStatus.FORBIDDEN:
-                raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
-            elif response.status_code == HTTPStatus.NOT_FOUND:
-                raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
-            elif response.status_code == HTTPStatus.CONFLICT:
-                raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
-                raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
-            elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-                raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
-            elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-                raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
-            else:
-                raise APIException("Unknown Error", response, query_params)
+        autocomplete_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Autocomplete_Endpoint.value
+        response = requests.get(autocomplete_api_url, headers=headers, params=query_params)
 
-        except Exception:
-            raise
+        if response.status_code == HTTPStatus.OK:
+            return response.json()
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNAUTHORIZED:
+            raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
+        elif response.status_code == HTTPStatus.FORBIDDEN:
+            raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
+        elif response.status_code == HTTPStatus.NOT_FOUND:
+            raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
+        elif response.status_code == HTTPStatus.CONFLICT:
+            raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
+            raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
+        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
+            raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
+        elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
+            raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
+        else:
+            raise APIException("Unknown Error", response, query_params)
 
     def geocode(self,
                 address: str,
@@ -129,49 +129,49 @@ class Places:
 
         :return: dict
         """
-        try:
-            query_params = dict()
-            headers = dict()
+        query_params = dict()
+        headers = dict()
 
-            geocode_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Geocode_Endpoint.value
-
+        if self._api_key is None:
+            headers["Authorization"] = f"Bearer {str(self._access_token)}"
+        else:
             query_params["api_key"] = self._api_key
-            query_params["address"] = address
-            query_params["language"] = language
 
-            if bounds is not None:
-                query_params["bounds"] = bounds
+        query_params["address"] = address
+        query_params["language"] = language
 
-            if x_request_id is not None:
-                headers["x_request_id"] = x_request_id
+        if bounds is not None:
+            query_params["bounds"] = bounds
 
-            if x_correlation_id is not None:
-                headers["x_correlation_id"] = x_correlation_id
+        if x_request_id is not None:
+            headers["x_request_id"] = x_request_id
 
-            response = requests.get(geocode_api_url, headers=headers, params=query_params)
+        if x_correlation_id is not None:
+            headers["x_correlation_id"] = x_correlation_id
 
-            if response.status_code == HTTPStatus.OK:
-                return response.json()
-            elif response.status_code == HTTPStatus.BAD_REQUEST:
-                raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNAUTHORIZED:
-                raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
-            elif response.status_code == HTTPStatus.FORBIDDEN:
-                raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
-            elif response.status_code == HTTPStatus.NOT_FOUND:
-                raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
-            elif response.status_code == HTTPStatus.CONFLICT:
-                raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
-                raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
-            elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-                raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
-            elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-                raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
-            else:
-                raise APIException("Unknown Error", response, query_params)
-        except Exception:
-            raise
+        geocode_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Geocode_Endpoint.value
+        response = requests.get(geocode_api_url, headers=headers, params=query_params)
+
+        if response.status_code == HTTPStatus.OK:
+            return response.json()
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNAUTHORIZED:
+            raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
+        elif response.status_code == HTTPStatus.FORBIDDEN:
+            raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
+        elif response.status_code == HTTPStatus.NOT_FOUND:
+            raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
+        elif response.status_code == HTTPStatus.CONFLICT:
+            raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
+            raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
+        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
+            raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
+        elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
+            raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
+        else:
+            raise APIException("Unknown Error", response, query_params)
 
     def reverse_geocode(self,
                         latlng: str,
@@ -192,42 +192,42 @@ class Places:
 
         :return: dict
         """
-        try:
-            query_params = dict()
-            headers = dict()
+        query_params = dict()
+        headers = dict()
 
-            reverse_geocode_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Reverse_Geocode_Endpoint.value
-
+        if self._api_key is None:
+            headers["Authorization"] = f"Bearer {str(self._access_token)}"
+        else:
             query_params["api_key"] = self._api_key
-            query_params["latlng"] = latlng
 
-            if x_request_id is not None:
-                headers["x_request_id"] = x_request_id
+        query_params["latlng"] = latlng
 
-            if x_correlation_id is not None:
-                headers["x_correlation_id"] = x_correlation_id
+        if x_request_id is not None:
+            headers["x_request_id"] = x_request_id
 
-            response = requests.get(reverse_geocode_api_url, headers=headers, params=query_params)
+        if x_correlation_id is not None:
+            headers["x_correlation_id"] = x_correlation_id
 
-            if response.status_code == HTTPStatus.OK:
-                return response.json()
-            elif response.status_code == HTTPStatus.BAD_REQUEST:
-                raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNAUTHORIZED:
-                raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
-            elif response.status_code == HTTPStatus.FORBIDDEN:
-                raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
-            elif response.status_code == HTTPStatus.NOT_FOUND:
-                raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
-            elif response.status_code == HTTPStatus.CONFLICT:
-                raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
-            elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
-                raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
-            elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-                raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
-            elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-                raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
-            else:
-                raise APIException("Unknown Error", response, query_params)
-        except Exception:
-            raise
+        reverse_geocode_api_url = Api.Protocol.value + Api.Host.value + Api.Places_Reverse_Geocode_Endpoint.value
+        response = requests.get(reverse_geocode_api_url, headers=headers, params=query_params)
+
+        if response.status_code == HTTPStatus.OK:
+            return response.json()
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise APIException(HTTPStatus.BAD_REQUEST.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNAUTHORIZED:
+            raise APIException(HTTPStatus.UNAUTHORIZED.description, response, query_params)
+        elif response.status_code == HTTPStatus.FORBIDDEN:
+            raise APIException(HTTPStatus.FORBIDDEN.description, response, query_params)
+        elif response.status_code == HTTPStatus.NOT_FOUND:
+            raise APIException(HTTPStatus.NOT_FOUND.description, response, query_params)
+        elif response.status_code == HTTPStatus.CONFLICT:
+            raise APIException(HTTPStatus.CONFLICT.description, response, query_params)
+        elif response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
+            raise APIException(HTTPStatus.UNPROCESSABLE_ENTITY.description, response, query_params)
+        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
+            raise APIException(HTTPStatus.TOO_MANY_REQUESTS.value, response, query_params)
+        elif response.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
+            raise APIException(HTTPStatus.INTERNAL_SERVER_ERROR.description, response, query_params)
+        else:
+            raise APIException("Unknown Error", response, query_params)
