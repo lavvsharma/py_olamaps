@@ -1,0 +1,2083 @@
+{
+	"info": {
+		"_postman_id": "0f9dc280-b251-43be-9156-e9d576166d91",
+		"name": "Ola Maps",
+		"description": "# Welcome to Ola Maps Postman Collection\n\nThis API provides developers with powerful tools to integrate mapping and location-based services into their applications. With Ola Maps API, you can display maps, generate directions, search for places, and much more.\n\n### API Endpoints and Specifications\n\nFor an exhaustive list of API endpoints and specifications, please visit Ola Maps [API Docs](https://maps.olakrutrim.com/apidocs)\n\nHow to use the Postman collection?\n\n1. Configure your api_key if you want to access the endpoint using API key or configure your client_id and client_secret if you want to use OAuth in the Variables section.\n    \n    1. How to create a project and get api_key, client_id and client_secret can be found [here](https://maps.olakrutrim.com/docs/auth).\n        \n    2. You can generate access_token using the Generate Access Token POST request and paste it in the Variables section so that you can keep using it for your further API access.\n        \n2. The Variables section also has some more variables which you will come to know slowly as you use the endpoints, read the documentation. I highly recommend reading Ola Maps official documentation to get an detailed understanding of their APIs.\n    \n3. Documentation can be found [here](https://cloud.olakrutrim.com/console/maps?section=map-docs).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12693470"
+	},
+	"item": [
+		{
+			"name": "API Key",
+			"item": [
+				{
+					"name": "Routing APIs",
+					"item": [
+						{
+							"name": "Directions API",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/directions?api_key={{api_key}}&origin=12.993103152916301,77.54332622119354&destination=12.972006793201695,77.5800850011884",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"directions"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "origin",
+											"value": "12.993103152916301,77.54332622119354",
+											"description": "Origin coordinates in the format lat,lng e.g: 12.993103152916301,77.54332622119354"
+										},
+										{
+											"key": "destination",
+											"value": "12.972006793201695,77.5800850011884",
+											"description": "Destination coordinates in the format lat,lng e.g: 12.972006793201695,77.5800850011884"
+										},
+										{
+											"key": "waypoints",
+											"value": "12.938399,77.632873|12.938041,77.628285",
+											"description": "Waypoints joined by separator (currently '|'). supported as lat,lng pairs - 12.938399,77.632873|12.938041,77.628285",
+											"disabled": true
+										},
+										{
+											"key": "mode",
+											"value": "driving",
+											"description": "The mode of travel for which the route has to be provided. Possible values are - driving, walking",
+											"disabled": true
+										},
+										{
+											"key": "alternatives",
+											"value": "false",
+											"description": "True if multiple routes are needed between source and destination",
+											"disabled": true
+										},
+										{
+											"key": "steps",
+											"value": "true",
+											"description": "True if steps are needed between source and destination",
+											"disabled": true
+										},
+										{
+											"key": "overview",
+											"value": "full",
+											"description": "Overview geometry either full, simplified or false according to highest zoom level it could be display on, or not at all",
+											"disabled": true
+										},
+										{
+											"key": "language",
+											"value": "en",
+											"description": "Language in which the response is expected. At the moment following languages are supported - kn (Kannada), en (English) and hi (Hindi)",
+											"disabled": true
+										},
+										{
+											"key": "traffic_metadata",
+											"value": "false",
+											"description": "If this field is true, traffic metadata would be sent in the response which will contain type of congestion. (travel_advisory data will only come in response if overview is passed as \"full\")",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Distance Matrix API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/distanceMatrix?api_key={{api_key}}&origins=28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675&destinations=28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"distanceMatrix"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "origins",
+											"value": "28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675",
+											"description": "Pipe separated origin coordinates in the format lat1,lng1|lat2,lng2 e.g: 28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675"
+										},
+										{
+											"key": "destinations",
+											"value": "28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288",
+											"description": "Pipe separated destination coordinates in the format lat1,lng1|lat2,lng2 e.g: 28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Routing APIs currently has two APIs under it\n\n1. **Directions API**\n    \n    1. The Directions API helps you add accurate routing and navigation features to your app. It allows users to plan trips with detailed directions, estimated travel times, and multiple route options. Whether for city driving or exploring remote areas, this tool makes journey planning simple and efficient.\n        \n2. **Distance Matrix API**\n    \n    1. The Distance Matrix API helps you calculate accurate distances and travel times between multiple points. It’s useful for mapping apps, logistics platforms, and location-based services. By providing near real-time ETAs and optimized routes, this tool helps in assigning tasks efficiently by identifying the closest person to a job."
+				},
+				{
+					"name": "Roads APIs",
+					"item": [
+						{
+							"name": "Snap To Road API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/snapToRoad?api_key={{api_key}}&points=12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778|12.992672238708593,77.64337109685341|12.99127113597667,77.65716623889841",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"snapToRoad"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "points",
+											"value": "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778|12.992672238708593,77.64337109685341|12.99127113597667,77.65716623889841",
+											"description": "The points to be snapped. Accepts a list of latitude/longitude pairs separated by commas. Coordinates should be separated by the pipe character."
+										},
+										{
+											"key": "enhancePath",
+											"value": "false",
+											"description": "If true, response includes additional points between the given snapped points to enrich the path and match the road’s curvature.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearest Roads API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/nearestRoads?api_key={{api_key}}&points=12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"nearestRoads"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "points",
+											"value": "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778",
+											"description": "(format: \"|\" separated list of lat,longs). Maximum 100 points supported"
+										},
+										{
+											"key": "radius",
+											"value": "500",
+											"description": "Optional (in meters, default 500 meters). When value of radius is between 0 and 1 then it takes the default value of radius",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Roads APIs currently has two APIs under it\n\n1. **Snap To Road API**\n    \n    1. The SnapToRoad API adjusts a list of geographic points to match the nearest road segments. It can handle up to 100 points per request and ensures that the path aligns with actual roads while keeping the points in order. The API can also add extra points to make the path more accurate.\n        \n2. **Nearest Roads API**\n    \n    1. The Nearest Roads API finds the closest road segments to multiple geographic points, even if they don't form a continuous path. It maps each point to its nearest road without considering a route between them. For maintaining routes, the SnapToRoad API is recommended."
+				},
+				{
+					"name": "Places API",
+					"item": [
+						{
+							"name": "Autocomplete API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/autocomplete?api_key={{api_key}}&input=kempe&location=12.931316595874005,77.61649243443775",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"autocomplete"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "input",
+											"value": "kempe",
+											"description": "The text string on which to search. The Place Autocomplete service will return candidate matches based on this string and order results based on their perceived relevance"
+										},
+										{
+											"key": "location",
+											"value": "12.931316595874005,77.61649243443775",
+											"description": "Location parameter helps in fetching more location specific results. This parameter must be specified as latitude,longitude.\nNote : If the location parameter is not specified, only name match is given priority."
+										},
+										{
+											"key": "radius",
+											"value": null,
+											"description": "Defines the distance (in meters) within which to return place results. This is obeyed when the param strictbounds is set to true",
+											"disabled": true
+										},
+										{
+											"key": "strictbounds",
+											"value": null,
+											"description": "Returns only those places that are strictly within the radius defined by location and radius. This is a restriction, rather than a bias, meaning that results outside this radius will not be returned even if they match the user input",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Place Details API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/details?api_key={{api_key}}&place_id=ola-platform:a79ed32419962a11a588ea92b83ca78e",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"details"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "place_id",
+											"value": "ola-platform:a79ed32419962a11a588ea92b83ca78e",
+											"description": "Place Id of the Place/POI whose details are to be fetched"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearby Search API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/nearbysearch?api_key={{api_key}}&layers=venue&location=12.931544865377818,77.61638622280486",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"nearbysearch"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "layers",
+											"value": "venue",
+											"description": "POI layer on which user needs to search. Multiple values can be provided separated by a comma.\nNote: The API may return zero_results if no layer is matched."
+										},
+										{
+											"key": "types",
+											"value": "restaurant",
+											"description": "Restricts the results to places matching the specified category.Multiple values can be provided separated by a comma.\nNote: The API may return zero_results if no type is matched.",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "12.931544865377818,77.61638622280486",
+											"description": "The latitude/longitude around which to retrieve nearby places information."
+										},
+										{
+											"key": "radius",
+											"value": "6000",
+											"description": "The distance (in meters) within which to return place results.",
+											"disabled": true
+										},
+										{
+											"key": "strictbounds",
+											"value": "false",
+											"description": "Whether the places returned will be strictly within the region defined by origin and radius.",
+											"disabled": true
+										},
+										{
+											"key": "withCentroid",
+											"value": "false",
+											"description": "Whether the places returned will have geometry (centroid) information.",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": null,
+											"description": "The maximum number of results to return in response.\nNote: Minimum value is 5 and Maximum is 50. Default value is 5.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Text Search API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/textsearch?api_key={{api_key}}&input=Cafes in Koramangala",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"textsearch"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "input",
+											"value": "Cafes in Koramangala",
+											"description": "The text query on which to search. The query must be a string.\n\nExample : Cafes in Koramangala"
+										},
+										{
+											"key": "location",
+											"value": "12.93142,77.61645",
+											"description": "Optionally, you can specify a location to search around that particular location. The location must be a string in the format of 'latitude,longitude'.\nNote: Location will be overridden if some place is mentioned in the input query",
+											"disabled": true
+										},
+										{
+											"key": "radius",
+											"value": "5000",
+											"description": "Radius will be used if you want to restrict the search results to a certain radius around the location.\nNote: Radius should be given along with the location.",
+											"disabled": true
+										},
+										{
+											"key": "types",
+											"value": "cafe",
+											"description": "Restricts the results to places matching the specified type. Multiple values can be provided separated by a comma (,).",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"description": "The maximum number of results to return in response.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Places APIs currently has four APIs under it\n\n1. **Autocomplete API**\n    \n    1. The Autocomplete API enhances search features by suggesting relevant completions in real-time as users type. It’s ideal for apps like connected cars, delivery services, and location searches, helping users quickly find places like restaurants, EV charging stations, or airports. Each suggestion includes helpful details like name, location, and address, making it easier to discover locations.\n        \n2. **Place Details API**\n    \n    1. The Place Detail API gives detailed information about a specific location using its unique place ID. It returns data like the address, coordinates, place type, and other relevant details.\n        \n3. **Nearby Search API**\n    \n    1. The Nearby Search API helps users find places of interest near a specific location by providing latitude, longitude, and a category. It allows users to search for places like restaurants, hotels, and parks, making it useful for apps like local business directories and travel guides.\n        \n4. **Text Search API**\n    \n    1. The Text Search API lets users search for locations based on text queries, like \"cafes in Koramangala\" or \"restaurants near Marathahalli, Bengaluru.\" It helps find places such as restaurants, cafes, and hotels in specific areas, making it easy to explore locations even in distant or unfamiliar regions across India.\n        \n    2. The Text Search API may struggle with vague or unclear queries, such as \"Mg Road\" or \"1st Cross Road,\" especially if there are multiple places with similar names. To get better results, it's best to use more detailed and descriptive queries."
+				},
+				{
+					"name": "Geocoding",
+					"item": [
+						{
+							"name": "Forward Geocoding API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/geocode?api_key={{api_key}}&address=Mumbai",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"geocode"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "address",
+											"value": "Mumbai",
+											"description": "The address to be geocoded. It cannot be empty."
+										},
+										{
+											"key": "bounds",
+											"value": "12.905004590071838,77.60793990913315|12.90221233024448,77.60555810753645",
+											"description": "Pipe (\"|\") separated lat,lng pairs of two corner points of a bounding box. Example: 12.905004590071838,77.60793990913315|12.90221233024448,77.60555810753645",
+											"disabled": true
+										},
+										{
+											"key": "language",
+											"value": "English",
+											"description": "The language in which to return the results. Currently only accepts English.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reverse Geocoding API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/reverse-geocode?api_key={{api_key}}&latlng=12.931316595874005,77.61649243443775",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"reverse-geocode"
+									],
+									"query": [
+										{
+											"key": "api_key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "latlng",
+											"value": "12.931316595874005,77.61649243443775",
+											"description": "The coordinates of which you want to do the reverse geocoding to get the address"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Geocoding currently has two APIs under it\n\n1. **Forward Geocoding API**\n    \n    1. The Geocoding API converts addresses and place names into geographic coordinates like latitude and longitude. It’s perfect for mapping services, logistics, and location-based apps, providing precise location data for navigation and delivery systems.\n        \n2. **Reverse Geocoding API**\n    \n    1. The Reverse Geocoding API turns geographic coordinates into readable place names, like street addresses or broader locations. It's useful for apps that need accurate location data, such as GPS tracking systems, navigation apps, or logistics platforms, providing real-time, meaningful location information."
+				},
+				{
+					"name": "Map Tiles",
+					"item": [
+						{
+							"name": "Vector Map Tiles",
+							"item": [
+								{
+									"name": "Array of data's TileJSONs",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/data/{{datasetName}}.json?api_key={{api_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"data",
+												"{{datasetName}}.json"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Styles",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/styles.json?api_key={{api_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"styles.json"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detail of a style",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/styles/{{styleName}}/style.json?api_key={{api_key}}",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"style.json"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "The Vector Map Tiles API lets you create dynamic, interactive maps for web or mobile apps. It provides detailed map tiles with data on roads, buildings, and land use, offering smooth performance and the ability to customize and style maps at any zoom level.\n\n**APIs**\n\n1. Array of Data\n    \n2. Styles\n    \n3. Details of a style"
+						},
+						{
+							"name": "Static Map Tiles",
+							"item": [
+								{
+									"name": "Static Map Image based on center point",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/{{lon}},{{lat}},{{zoom}}/{{width}}x{{height}}.{{format}}?api_key={{api_key}}&marker=77.61,12.93|red|scale:0.9&path=77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"{{lon}},{{lat}},{{zoom}}",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												},
+												{
+													"key": "marker",
+													"value": "77.61,12.93|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Static Map Image based on bounding box",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/{{minx}},{{miny}},{{maxx}},{{maxy}}/{{width}}x{{height}}.{{format}}?api_key={{api_key}}&marker=77.61352646534839,12.934719789288083|red|scale:0.9&path=77.61352646534839,12.934719789288083|77.6150654941051,12.93487100612498|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"{{minx}},{{miny}},{{maxx}},{{maxy}}",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												},
+												{
+													"key": "marker",
+													"value": "77.61352646534839,12.934719789288083|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61352646534839,12.934719789288083|77.6150654941051,12.93487100612498|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Static Map Image",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/auto/{{width}}x{{height}}.{{format}}?api_key={{api_key}}&marker=77.61,12.93|red|scale:0.9&path=77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"auto",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "api_key",
+													"value": "{{api_key}}"
+												},
+												{
+													"key": "marker",
+													"value": "77.61,12.93|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "The Static Tiles API helps you create high-quality, static map images for web maps, offline navigation, and data visualizations. It provides map tiles with detailed geographic data like roads, buildings, and land use patterns.\n\n**APIs**\n\n1. Static Map Image based on center point\n    \n2. Static Map Image based on bounding box\n    \n3. Static Map Image"
+						}
+					],
+					"description": "Map Tiles currently has two categories under it and those two categories have respective three and four APIs.\n\n1. Vector Tiles API\n    \n    1. The Vector Map Tiles API lets you create dynamic, interactive maps for web or mobile apps. It provides detailed map tiles with data on roads, buildings, and land use, offering smooth performance and the ability to customize and style maps at any zoom level.\n        \n    2. APIs\n        \n        1. Array of Data\n            \n        2. Styles\n            \n        3. Details of a style\n            \n2. Static Tiles API\n    \n    1. The Static Tiles API helps you create high-quality, static map images for web maps, offline navigation, and data visualizations. It provides map tiles with detailed geographic data like roads, buildings, and land use patterns.\n        \n    2. APIs\n        \n        1. Static Map Image based on center point\n            \n        2. Static Map Image based on bounding box\n            \n        3. Static Map Image"
+				}
+			],
+			"description": "This folder includes all the Ola Maps API that can be accessed using API Key.  \n**Note** - Please set the api_key on the Ola Maps folder under variables section.\n\nThis folder includes the below APIs\n\n1. Routing APIs\n    \n    1. Directions API\n        \n    2. Distance Matrix API\n        \n2. Roads APIs\n    \n    1. Snap to Road API\n        \n    2. Nearest Roads API\n        \n3. Places APIs\n    \n    1. Autocomplete API\n        \n    2. Place Details API\n        \n    3. Nearby Search API\n        \n    4. Text Search API\n        \n4. Geocoding\n    \n    1. Geocoding API\n        \n    2. Reverse Geocoding API\n        \n5. Map Tiles\n    \n    1. Vector Tiles API\n        \n    2. Static Tiles API",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Access Token",
+			"item": [
+				{
+					"name": "Routing APIs",
+					"item": [
+						{
+							"name": "Directions API",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/directions?origin=12.993103152916301,77.54332622119354&destination=12.972006793201695,77.5800850011884",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"directions"
+									],
+									"query": [
+										{
+											"key": "origin",
+											"value": "12.993103152916301,77.54332622119354",
+											"description": "Origin coordinates in the format lat,lng e.g: 12.993103152916301,77.54332622119354"
+										},
+										{
+											"key": "destination",
+											"value": "12.972006793201695,77.5800850011884",
+											"description": "Destination coordinates in the format lat,lng e.g: 12.972006793201695,77.5800850011884"
+										},
+										{
+											"key": "waypoints",
+											"value": "12.938399,77.632873|12.938041,77.628285",
+											"description": "Waypoints joined by separator (currently '|'). supported as lat,lng pairs - 12.938399,77.632873|12.938041,77.628285",
+											"disabled": true
+										},
+										{
+											"key": "mode",
+											"value": "driving",
+											"description": "The mode of travel for which the route has to be provided. Possible values are - driving, walking",
+											"disabled": true
+										},
+										{
+											"key": "alternatives",
+											"value": "false",
+											"description": "True if multiple routes are needed between source and destination",
+											"disabled": true
+										},
+										{
+											"key": "steps",
+											"value": "true",
+											"description": "True if steps are needed between source and destination",
+											"disabled": true
+										},
+										{
+											"key": "overview",
+											"value": "full",
+											"description": "Overview geometry either full, simplified or false according to highest zoom level it could be display on, or not at all",
+											"disabled": true
+										},
+										{
+											"key": "language",
+											"value": "en",
+											"description": "Language in which the response is expected. At the moment following languages are supported - kn (Kannada), en (English) and hi (Hindi)",
+											"disabled": true
+										},
+										{
+											"key": "traffic_metadata",
+											"value": "false",
+											"description": "If this field is true, traffic metadata would be sent in the response which will contain type of congestion. (travel_advisory data will only come in response if overview is passed as \"full\")",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Distance Matrix API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/distanceMatrix?origins=28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675&destinations=28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"distanceMatrix"
+									],
+									"query": [
+										{
+											"key": "origins",
+											"value": "28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675",
+											"description": "Pipe separated origin coordinates in the format lat1,lng1|lat2,lng2 e.g: 28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675"
+										},
+										{
+											"key": "destinations",
+											"value": "28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288",
+											"description": "Pipe separated destination coordinates in the format lat1,lng1|lat2,lng2 e.g: 28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Routing APIs currently has two APIs under it\n\n1. **Directions API**\n    \n    1. The Directions API helps you add accurate routing and navigation features to your app. It allows users to plan trips with detailed directions, estimated travel times, and multiple route options. Whether for city driving or exploring remote areas, this tool makes journey planning simple and efficient.\n        \n2. **Distance Matrix API**\n    \n    1. The Distance Matrix API helps you calculate accurate distances and travel times between multiple points. It’s useful for mapping apps, logistics platforms, and location-based services. By providing near real-time ETAs and optimized routes, this tool helps in assigning tasks efficiently by identifying the closest person to a job."
+				},
+				{
+					"name": "Roads APIs",
+					"item": [
+						{
+							"name": "Snap To Road API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/snapToRoad?points=12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778|12.992672238708593,77.64337109685341|12.99127113597667,77.65716623889841",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"snapToRoad"
+									],
+									"query": [
+										{
+											"key": "points",
+											"value": "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778|12.992672238708593,77.64337109685341|12.99127113597667,77.65716623889841",
+											"description": "The points to be snapped. Accepts a list of latitude/longitude pairs separated by commas. Coordinates should be separated by the pipe character."
+										},
+										{
+											"key": "enhancePath",
+											"value": "false",
+											"description": "If true, response includes additional points between the given snapped points to enrich the path and match the road’s curvature.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearest Roads API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/routing/v1/nearestRoads?points=12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"routing",
+										"v1",
+										"nearestRoads"
+									],
+									"query": [
+										{
+											"key": "points",
+											"value": "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778",
+											"description": "(format: \"|\" separated list of lat,longs). Maximum 100 points supported"
+										},
+										{
+											"key": "radius",
+											"value": "500",
+											"description": "Optional (in meters, default 500 meters). When value of radius is between 0 and 1 then it takes the default value of radius",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Roads APIs currently has two APIs under it\n\n1. **Snap To Road API**\n    \n    1. The SnapToRoad API adjusts a list of geographic points to match the nearest road segments. It can handle up to 100 points per request and ensures that the path aligns with actual roads while keeping the points in order. The API can also add extra points to make the path more accurate.\n        \n2. **Nearest Roads API**\n    \n    1. The Nearest Roads API finds the closest road segments to multiple geographic points, even if they don't form a continuous path. It maps each point to its nearest road without considering a route between them. For maintaining routes, the SnapToRoad API is recommended."
+				},
+				{
+					"name": "Places API",
+					"item": [
+						{
+							"name": "Autocomplete API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/autocomplete?input=kempe&location=12.931316595874005,77.61649243443775",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"autocomplete"
+									],
+									"query": [
+										{
+											"key": "input",
+											"value": "kempe",
+											"description": "The text string on which to search. The Place Autocomplete service will return candidate matches based on this string and order results based on their perceived relevance"
+										},
+										{
+											"key": "location",
+											"value": "12.931316595874005,77.61649243443775",
+											"description": "Location parameter helps in fetching more location specific results. This parameter must be specified as latitude,longitude.\nNote : If the location parameter is not specified, only name match is given priority."
+										},
+										{
+											"key": "radius",
+											"value": "",
+											"description": "Defines the distance (in meters) within which to return place results. This is obeyed when the param strictbounds is set to true",
+											"disabled": true
+										},
+										{
+											"key": "strictbounds",
+											"value": "",
+											"description": "Returns only those places that are strictly within the radius defined by location and radius. This is a restriction, rather than a bias, meaning that results outside this radius will not be returned even if they match the user input",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Place Details API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/details?place_id=ola-platform:a79ed32419962a11a588ea92b83ca78e",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"details"
+									],
+									"query": [
+										{
+											"key": "place_id",
+											"value": "ola-platform:a79ed32419962a11a588ea92b83ca78e",
+											"description": "Place Id of the Place/POI whose details are to be fetched"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearby Search API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/nearbysearch?layers=venue&location=12.931544865377818,77.61638622280486",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"nearbysearch"
+									],
+									"query": [
+										{
+											"key": "layers",
+											"value": "venue",
+											"description": "POI layer on which user needs to search. Multiple values can be provided separated by a comma.\nNote: The API may return zero_results if no layer is matched."
+										},
+										{
+											"key": "types",
+											"value": "restaurant",
+											"description": "Restricts the results to places matching the specified category.Multiple values can be provided separated by a comma.\nNote: The API may return zero_results if no type is matched.",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "12.931544865377818,77.61638622280486",
+											"description": "The latitude/longitude around which to retrieve nearby places information."
+										},
+										{
+											"key": "radius",
+											"value": "6000",
+											"description": "The distance (in meters) within which to return place results.",
+											"disabled": true
+										},
+										{
+											"key": "strictbounds",
+											"value": "false",
+											"description": "Whether the places returned will be strictly within the region defined by origin and radius.",
+											"disabled": true
+										},
+										{
+											"key": "withCentroid",
+											"value": "false",
+											"description": "Whether the places returned will have geometry (centroid) information.",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "",
+											"description": "The maximum number of results to return in response.\nNote: Minimum value is 5 and Maximum is 50. Default value is 5.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Text Search API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/textsearch?input=Cafes in Koramangala",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"textsearch"
+									],
+									"query": [
+										{
+											"key": "input",
+											"value": "Cafes in Koramangala",
+											"description": "The text query on which to search. The query must be a string.\n\nExample : Cafes in Koramangala"
+										},
+										{
+											"key": "location",
+											"value": "12.93142,77.61645",
+											"description": "Optionally, you can specify a location to search around that particular location. The location must be a string in the format of 'latitude,longitude'.\nNote: Location will be overridden if some place is mentioned in the input query",
+											"disabled": true
+										},
+										{
+											"key": "radius",
+											"value": "5000",
+											"description": "Radius will be used if you want to restrict the search results to a certain radius around the location.\nNote: Radius should be given along with the location.",
+											"disabled": true
+										},
+										{
+											"key": "types",
+											"value": "cafe",
+											"description": "Restricts the results to places matching the specified type. Multiple values can be provided separated by a comma (,).",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"description": "The maximum number of results to return in response.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Places APIs currently has four APIs under it\n\n1. **Autocomplete API**\n    \n    1. The Autocomplete API enhances search features by suggesting relevant completions in real-time as users type. It’s ideal for apps like connected cars, delivery services, and location searches, helping users quickly find places like restaurants, EV charging stations, or airports. Each suggestion includes helpful details like name, location, and address, making it easier to discover locations.\n        \n2. **Place Details API**\n    \n    1. The Place Detail API gives detailed information about a specific location using its unique place ID. It returns data like the address, coordinates, place type, and other relevant details.\n        \n3. **Nearby Search API**\n    \n    1. The Nearby Search API helps users find places of interest near a specific location by providing latitude, longitude, and a category. It allows users to search for places like restaurants, hotels, and parks, making it useful for apps like local business directories and travel guides.\n        \n4. **Text Search API**\n    \n    1. The Text Search API lets users search for locations based on text queries, like \"cafes in Koramangala\" or \"restaurants near Marathahalli, Bengaluru.\" It helps find places such as restaurants, cafes, and hotels in specific areas, making it easy to explore locations even in distant or unfamiliar regions across India.\n        \n    2. The Text Search API may struggle with vague or unclear queries, such as \"Mg Road\" or \"1st Cross Road,\" especially if there are multiple places with similar names. To get better results, it's best to use more detailed and descriptive queries."
+				},
+				{
+					"name": "Geocoding",
+					"item": [
+						{
+							"name": "Forward Geocoding API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/geocode?address=Mumbai",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"geocode"
+									],
+									"query": [
+										{
+											"key": "address",
+											"value": "Mumbai",
+											"description": "The address to be geocoded. It cannot be empty."
+										},
+										{
+											"key": "bounds",
+											"value": "12.905004590071838,77.60793990913315|12.90221233024448,77.60555810753645",
+											"description": "Pipe (\"|\") separated lat,lng pairs of two corner points of a bounding box. Example: 12.905004590071838,77.60793990913315|12.90221233024448,77.60555810753645",
+											"disabled": true
+										},
+										{
+											"key": "language",
+											"value": "English",
+											"description": "The language in which to return the results. Currently only accepts English.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reverse Geocoding API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-Id",
+										"value": "",
+										"description": "A UUIDv4 unique to that HTTP request and response combination",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Correlation-Id",
+										"value": "",
+										"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.olamaps.io/places/v1/reverse-geocode?latlng=12.931316595874005,77.61649243443775",
+									"protocol": "https",
+									"host": [
+										"api",
+										"olamaps",
+										"io"
+									],
+									"path": [
+										"places",
+										"v1",
+										"reverse-geocode"
+									],
+									"query": [
+										{
+											"key": "latlng",
+											"value": "12.931316595874005,77.61649243443775",
+											"description": "The coordinates of which you want to do the reverse geocoding to get the address"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Geocoding currently has two APIs under it\n\n1. **Forward Geocoding API**\n    \n    1. The Geocoding API converts addresses and place names into geographic coordinates like latitude and longitude. It’s perfect for mapping services, logistics, and location-based apps, providing precise location data for navigation and delivery systems.\n        \n2. **Reverse Geocoding API**\n    \n    1. The Reverse Geocoding API turns geographic coordinates into readable place names, like street addresses or broader locations. It's useful for apps that need accurate location data, such as GPS tracking systems, navigation apps, or logistics platforms, providing real-time, meaningful location information."
+				},
+				{
+					"name": "Tiles APIs",
+					"item": [
+						{
+							"name": "Vector Map Tiles",
+							"item": [
+								{
+									"name": "Array of data's TileJSONs",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/data/{{datasetName}}.json",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"data",
+												"{{datasetName}}.json"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Styles",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/styles.json",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"styles.json"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detail of a style",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Request-ID",
+												"value": "",
+												"description": "A UUDv4 unique to that HTTP request and response combination",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-Correlation-ID",
+												"value": "",
+												"description": "A UUIDv4 unique over a series of requests and responses, identifying a transaction",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/vector/v1/styles/{{styleName}}/style.json",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"vector",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"style.json"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "The Vector Map Tiles API lets you create dynamic, interactive maps for web or mobile apps. It provides detailed map tiles with data on roads, buildings, and land use, offering smooth performance and the ability to customize and style maps at any zoom level.\n\n**APIs**\n\n1. Array of Data\n    \n2. Styles\n    \n3. Details of a style"
+						},
+						{
+							"name": "Static Map Tiles",
+							"item": [
+								{
+									"name": "Static Map Image based on center point",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/{{lon}},{{lat}},{{zoom}}/{{width}}x{{height}}.{{format}}?marker=77.61,12.93|red|scale:0.9&path=77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"{{lon}},{{lat}},{{zoom}}",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "marker",
+													"value": "77.61,12.93|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Static Map Image based on bounding box",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/{{minx}},{{miny}},{{maxx}},{{maxy}}/{{width}}x{{height}}.{{format}}?marker=77.61352646534839,12.934719789288083|red|scale:0.9&path=77.61352646534839,12.934719789288083|77.6150654941051,12.93487100612498|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"{{minx}},{{miny}},{{maxx}},{{maxy}}",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "marker",
+													"value": "77.61352646534839,12.934719789288083|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61352646534839,12.934719789288083|77.6150654941051,12.93487100612498|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Static Map Image",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://api.olamaps.io/tiles/v1/styles/{{styleName}}/static/auto/{{width}}x{{height}}.{{format}}?marker=77.61,12.93|red|scale:0.9&path=77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+											"protocol": "https",
+											"host": [
+												"api",
+												"olamaps",
+												"io"
+											],
+											"path": [
+												"tiles",
+												"v1",
+												"styles",
+												"{{styleName}}",
+												"static",
+												"auto",
+												"{{width}}x{{height}}.{{format}}"
+											],
+											"query": [
+												{
+													"key": "marker",
+													"value": "77.61,12.93|red|scale:0.9",
+													"description": "Add one or more markers to attach to the image at specified locations. in format lng,lat|iconColor|option|option|... Currently we ONLY support red and green markers. You can add the supported color in the format mentioned above. It takes set of options to customise the marker in the format of optionName:optionValue and supports the following options. scale - Factor to scale image by. 0.5 - Scales the image to half it's original size offset - Image offset as positive or negative pixel value in format [offsetX],[offsetY]. 2,-4 - Image will be moved 2 pixel to the right and 4 pixel in the upwards direction from the provided location."
+												},
+												{
+													"key": "path",
+													"value": "77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:%2300ff44",
+													"description": "Defines a single path of two or more connected points to overlay on the image at specified locations. This parameter takes comma-separated lng,lat, pipe-separated pairs. The polyline can also be encoded using the 'enc:' prefix. It takes set of options to customisze the path in the format of optionName:optionValue and supports the following options. width - width of the line path stroke - color of the line path ( Hex Color Value)"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "The Static Tiles API helps you create high-quality, static map images for web maps, offline navigation, and data visualizations. It provides map tiles with detailed geographic data like roads, buildings, and land use patterns.\n\n**APIs**\n\n1. Static Map Image based on center point\n    \n2. Static Map Image based on bounding box\n    \n3. Static Map Image"
+						}
+					],
+					"description": "Map Tiles currently has two categories under it and those two categories have respective three and four APIs.\n\n1. Vector Tiles API\n    \n    1. The Vector Map Tiles API lets you create dynamic, interactive maps for web or mobile apps. It provides detailed map tiles with data on roads, buildings, and land use, offering smooth performance and the ability to customize and style maps at any zoom level.\n        \n    2. APIs\n        \n        1. Array of Data\n            \n        2. Styles\n            \n        3. Details of a style\n            \n2. Static Tiles API\n    \n    1. The Static Tiles API helps you create high-quality, static map images for web maps, offline navigation, and data visualizations. It provides map tiles with detailed geographic data like roads, buildings, and land use patterns.\n        \n    2. APIs\n        \n        1. Static Map Image based on center point\n            \n        2. Static Map Image based on bounding box\n            \n        3. Static Map Image"
+				}
+			],
+			"description": "This folder includes all the Ola Maps API that can be accessed using Access Token.  \n**Note** - Please set the access_token on the Ola Maps folder under variables section. Generate the access_token using Generate Access Token endpoint with the help of client_id and client_secret which is to be set under the variables section as well.\n\nThis folder includes the below APIs\n\n1. Routing APIs\n    \n    1. Directions API\n        \n    2. Distance Matrix API\n        \n2. Roads APIs\n    \n    1. Snap to Road API\n        \n    2. Nearest Roads API\n        \n3. Places APIs\n    \n    1. Autocomplete API\n        \n    2. Place Details API\n        \n    3. Nearby Search API\n        \n    4. Text Search API\n        \n4. Geocoding\n    \n    1. Geocoding API\n        \n    2. Reverse Geocoding API\n        \n5. Map Tiles\n    \n    1. Vector Tiles API\n        \n    2. Static Tiles API"
+		},
+		{
+			"name": "Generate Access Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_Id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://account.olamaps.io/realms/olamaps/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"account",
+						"olamaps",
+						"io"
+					],
+					"path": [
+						"realms",
+						"olamaps",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_key",
+			"value": "<your_api_key>"
+		},
+		{
+			"key": "client_Id",
+			"value": "<your_client_id>",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "<your_client_secret>",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "<your_access_token>",
+			"type": "string"
+		},
+		{
+			"key": "datasetName",
+			"value": "planet",
+			"type": "string"
+		},
+		{
+			"key": "styleName",
+			"value": "default-light-standard",
+			"type": "string"
+		},
+		{
+			"key": "lon",
+			"value": "77.61",
+			"type": "string"
+		},
+		{
+			"key": "lat",
+			"value": "12.93",
+			"type": "string"
+		},
+		{
+			"key": "zoom",
+			"value": "15",
+			"type": "string"
+		},
+		{
+			"key": "width",
+			"value": "800",
+			"type": "string"
+		},
+		{
+			"key": "height",
+			"value": "600",
+			"type": "string"
+		},
+		{
+			"key": "format",
+			"value": "png",
+			"type": "string"
+		},
+		{
+			"key": "minx",
+			"value": "77.611182859373",
+			"type": "string"
+		},
+		{
+			"key": "miny",
+			"value": "12.93219851203095",
+			"type": "string"
+		},
+		{
+			"key": "maxx",
+			"value": "77.61513567417848",
+			"type": "string"
+		},
+		{
+			"key": "maxy",
+			"value": "12.935739723360513",
+			"type": "string"
+		}
+	]
+}
