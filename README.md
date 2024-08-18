@@ -12,8 +12,8 @@
 
 The Ola Maps Python library provides convenient access to the Ola Maps API from any Python 3.9+ application. The library
 currently includes type definitions
-for [Routing APIs](https://maps.olakrutrim.com/apidocs/routing), [Places APIs](https://maps.olakrutrim.com/apidocs/places)
-and [Maps Tiles](https://maps.olakrutrim.com/apidocs/tiles).
+for Routing APIs, Roads APIs, Places APIs, Geocoding and Maps Tiles details can be
+found [here](https://cloud.olakrutrim.com/console/maps?section=map-docs).
 
 ## Installation
 
@@ -22,25 +22,39 @@ and [Maps Tiles](https://maps.olakrutrim.com/apidocs/tiles).
 pip install py_olamaps
 ```
 
+## Postman Collection
+
+[Download Postman Collection]()
+
 ## Generate API Key
 
-Follow the official documentation of [Ola Maps](https://maps.olakrutrim.com/docs) to generate the API Key. We will soon
-publish a documentation from our end.
+Follow the official documentation of [Ola Maps](https://maps.olakrutrim.com/docs) to generate the API Key.
 
 ## Usage
 
-1. [Routing APIs](#routing)
+1. [Routing APIs](#routing-api)
     1. [Directions API](#directions-api)
-2. [Places APIs](#places)
+    2. [Distance Matrix API](#distance-matrix-api)
+2. [Roads API](#roads-api)
+    1. [Snap To Road API](#snap-to-road-api)
+    2. [Nearest Roads API](#nearest-roads-api)
+3. [Places API](#places-api)
     1. [Autocomplete API](#autocomplete-api)
-    2. [Geocode API](#geocode-api)
-    3. [Reverse Geocode API](#reverse-geocode-api)
-3. [Maps Tiles API](#map-tiles)
-    1. [Array of data's TileJSONs](#array-of-datas-tilejsons)
-    2. [PBF file for data](#pbf-file-for-data)
-    3. [Styles](#styles)
-    4. [Detail of a style](#detail-of-a-style)
-    5. [Glyph range](#glyph-range)
+    2. [Place Details API](#place-details-api)
+    3. [Nearby Search API](#nearby-search-api)
+    4. [Text Search API](#text-search-api)
+4. [Geocode API](#geocode-api)
+    1. [Forward Geocode](#forward-geocode-api)
+    2. [Reverse Geocode](#reverse-geocode-api)
+5. [Maps Tiles API](#map-tiles-api)
+    1. [Vector Map Tiles API](#vector-map-tiles-api)
+        1. [Array of data API](#array-of-data-api)
+        2. [Styles API](#styles-api)
+        3. [Detail of Style API](#detail-of-a-style-api)
+    2. [Static Map Tiles API](#static-map-tiles-api)
+        1. [Static Map Image based on Center Point API](#static-map-image-based-on-center-point-api)
+        2. [Static Map Image based on Bounding Box API](#static-map-image-based-on-bounding-box-api)
+        3. [Static Map Images API](#static-map-image)
 
 ## Initialize Client
 
@@ -58,7 +72,7 @@ client = OlaMaps(client_id=os.environ.get("OLA_MAPS_CLIENT_ID"),
                  client_secret=os.environ.get("OLA_MAPS_CLIENT_SECRET"))
 ```
 
-### Routing
+### Routing API
 
 #### Directions API
 
@@ -71,12 +85,60 @@ client = OlaMaps(
 )
 
 routing_direction = client.routing.directions(
-    origin="12.993103152916301,77.54332622119354",
-    destination="12.972006793201695,77.5800850011884"
+    "12.993103152916301,77.54332622119354",
+    "12.972006793201695,77.5800850011884"
 )
 ```
 
-### Places
+#### Distance Matrix API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+distance_matrix = client.routing.distance_matrix(
+    "28.71866756826579,77.03699668376802|28.638555357785652,76.96550156007675",
+    "28.638555357785652,76.96550156007675|28.53966907108812,77.05190669909288"
+)
+```
+
+### Roads API
+
+#### Snap To Road API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+snap_to_Road = client.roads.snap_to_road(
+    "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778|12.992672238708593,77.64337109685341|12.99127113597667,77.65716623889841",
+)
+```
+
+#### Nearest Roads API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+nearest_roads = client.roads.nearest_roads(
+    "12.99927894246456,77.67323803525812|12.992086564113583,77.65899014102202|12.992567456375086,77.65989136324778",
+)
+```
+
+### Places API
 
 #### Autocomplete API
 
@@ -89,11 +151,11 @@ client = OlaMaps(
 )
 
 autocomplete = client.places.autocomplete(
-    input='kempe'
+    "kempe"
 )
 ```
 
-#### Geocode API
+#### Place Details API
 
 ```python
 import os
@@ -103,9 +165,55 @@ client = OlaMaps(
     api_key=os.environ.get("OLA_MAPS_API_KEY"),
 )
 
-geocode = client.places.geocode(
-    address='Mumbai'
+place_details = client.places.place_details(
+    "ola-platform:a79ed32419962a11a588ea92b83ca78e"
 )
+```
+
+#### Nearby Search API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+nearby_search = client.places.nearby_search(
+    "venue",
+    "12.931544865377818,77.61638622280486"
+)
+```
+
+#### Text Search API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+text_search = client.places.text_search(
+    "Cafes in Koramangala"
+)
+```
+
+### Geocode API
+
+#### Forward Geocode API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+forward_geocode = client.geocode.forward_geocode("Mumbai")
 ```
 
 #### Reverse Geocode API
@@ -118,14 +226,14 @@ client = OlaMaps(
     api_key=os.environ.get("OLA_MAPS_API_KEY"),
 )
 
-reverse_geocode = client.places.reverse_geocode(
-    latlng='12.931316595874005,77.61649243443775'
-)
+reverse_geocode = client.geocode.reverse_geocode("12.931316595874005,77.61649243443775")
 ```
 
-### Map Tiles
+### Map Tiles API
 
-#### Array of data's TileJSONs
+#### Vector Map Tiles API
+
+##### Array of data API
 
 ```python
 import os
@@ -135,23 +243,10 @@ client = OlaMaps(
     api_key=os.environ.get("OLA_MAPS_API_KEY"),
 )
 
-array_of_data = client.map_tiles.get_tilejson_array("planet")
+array_of_data = client.map_tiles.array_of_data("planet")
 ```
 
-#### PBF file for data
-
-```python
-import os
-from py_olamaps.OlaMaps import OlaMaps
-
-client = OlaMaps(
-    api_key=os.environ.get("OLA_MAPS_API_KEY"),
-)
-
-pbf_file = client.map_tiles.get_pbf_file("planet", 14, 110, 1010)
-```
-
-#### Styles
+##### Styles API
 
 ```python
 import os
@@ -164,7 +259,7 @@ client = OlaMaps(
 styles = client.map_tiles.get_map_style()
 ```
 
-#### Detail of a style
+##### Detail of a style API
 
 ```python
 import os
@@ -177,7 +272,9 @@ client = OlaMaps(
 detail_of_style = client.map_tiles.get_style_details("default-light-standard")
 ```
 
-#### Glyph range
+#### Static Map Tiles API
+
+##### Static Map Image based on Center Point API
 
 ```python
 import os
@@ -187,7 +284,40 @@ client = OlaMaps(
     api_key=os.environ.get("OLA_MAPS_API_KEY"),
 )
 
-glyph_range = client.map_tiles.get_glyph_range("Noto Sans Bold", 0, 255)
+# note - the below returns an object as it contains an image
+smi_center_point = client.map_tiles.static_map_image_based_on_center_point("default-light-standard", 77.61, 12.93, 15,
+                                                                           800, 600, "png")
+```
+
+##### Static Map Image based on Bounding Box API
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+# note - the below returns an object as it contains an image
+smi_bounding_box = client.map_tiles.static_map_image_based_on_bounding_box("default-light-standard", 77.611182859373,
+                                                                           12.93219851203095, 77.61513567417848,
+                                                                           12.935739723360513, 800, 600, "png")
+``` 
+
+##### Static Map Image
+
+```python
+import os
+from py_olamaps.OlaMaps import OlaMaps
+
+client = OlaMaps(
+    api_key=os.environ.get("OLA_MAPS_API_KEY"),
+)
+
+# note - the below returns an object as it contains an image
+static_map_image = client.map_tiles.static_map_image("default-light-standard", 800, 600, "png",
+                                                     "77.61,12.93|77.61190639293811,12.937637130956137|width:6|stroke:#00ff44")
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -210,15 +340,6 @@ Error codes are as followed:
 | 422         | `Unprocessable Entity` |
 | 429         | `Too Many Requests`    |
 | >=500       | `InternalServerError`  |
-
-### Limitation
-
-1. Currently, only api key is being used for sending request to Ola Maps API. Soon, the support for sending API request
-   with
-   client
-   id and client secret will be added.
-2. This is because I am facing a issue with Reverse Geocode API which is a part of Places API. The issue is raised with
-   Ola Maps team for the same.
 
 ### Retries
 
