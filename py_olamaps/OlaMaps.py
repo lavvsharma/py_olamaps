@@ -47,6 +47,8 @@ class OlaMaps:
         self.routing = resources.Routing(self)
         self.places = resources.Places(self)
         self.map_tiles = resources.MapTiles(self)
+        self.roads = resources.Roads(self)
+        self.geocode = resources.Geocode(self)
 
     def generate_access_token(self):
         try:
