@@ -24,7 +24,7 @@ pip install py_olamaps
 
 ## Postman Collection
 
-[Download Postman Collection]()
+[Download Postman Collection](https://github.com/lavvsharma/py_olamaps/blob/main/Ola%20Maps.postman_collection.json)
 
 ## Generate API Key
 
